@@ -24,11 +24,18 @@ def fetch_polymarket_markets():
             return None
             
         # Print first 5 markets
-        for i, market in enumerate(markets[:5], 1):
+        for i, market in enumerate(markets[:3], 1):
+
+            volume = market.get('volume', '0')
+
+            #DEBUG: Showing Volume Values To Double Check
+            #print(f"Volume {i} volume: ${volume}")
+            if float(volume) < 10000:
+                continue
+
             print(f"\n{i}. {market.get('question', 'No question')}")
             print(f"   Category: {market.get('category', 'Unknown')}")
             print(f"   Active: {market.get('active', False)}")
-            volume = market.get('volume', '0')
             print(f"   Volume: ${volume}")
         
         return markets
